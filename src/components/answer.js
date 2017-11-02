@@ -5,13 +5,12 @@ class Answer extends Component{
         super();
         this.state={
             style:{},
+            dd:false,
         }
     }
     keydown=(e)=>{
-        console.log(e.key)
         if (e.key===" "){
             this.props.destroy()
-            console.log("Space!")
         }
 
     }
@@ -22,7 +21,8 @@ class Answer extends Component{
             "left":0,
             "width":"100vw",
             "height":"100%",
-            }
+            },
+            dd:this.props.dd
         })
         document.addEventListener("keydown",this.keydown)
         this.content.focus()
@@ -42,8 +42,13 @@ class Answer extends Component{
 
     }
     render(){
+        let dd=[];
+        if (this.props.dd){
+            dd=<h1 style={{"color":"orange"}}>DAILY DOUBLE!!</h1>
+        }
         return(
             <div className="answer" style={this.state.style} ref={(ref)=>this.content=ref}>
+                {dd}
                 <h1>{this.props.content}</h1>
             </div>
         )

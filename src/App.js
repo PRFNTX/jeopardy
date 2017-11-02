@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from "react-dom"
-import logo from './logo.svg';
 import './App.css';
 import tableStyle from "./components/styles/table.css"
 import HeaderRow from "./components/headerRow"
@@ -14,7 +12,8 @@ class App extends Component {
       answer:[],
     }
     this.content={
-      categories:["Watch Your Language","Render Me Speechless","Fine Imports","I Object","Tag, You're It","This"],
+      categories:["Watch Your Language","Render Me Speechless","Fine Imports","I Object","Tag, You're It","This Category"],
+      //"element of surprise", "Git Gud",  
       answers:[
         ["lang 1","lang 2","lang3","lang4","lang5","lang6"],
         ["rend 1","rend 2","rend 3","rend 4","rend 5","rend 6"],
@@ -24,6 +23,10 @@ class App extends Component {
         ["this 1","this 2","this 3","this 4","this 5","this 6"]
       ]
     }
+    this.double={
+      x:3,
+      y:4
+    }
   }
 
   showAnswer=(at,pos)=>{
@@ -32,7 +35,11 @@ class App extends Component {
       "top":at.top,
       "left":at.left
     }
-    let answer=<Answer style={stpos} content={this.content.answers[pos.x-1][pos.y-1]} destroy={this.destroy} />
+    let dd=false
+    if ((pos.x===this.double.x)&&(pos.y===this.double.y)){
+      dd=true
+    }
+    let answer=<Answer style={stpos} content={this.content.answers[pos.x-1][pos.y-1]} destroy={this.destroy} dd={dd}/>
     this.setState({
       answer:answer
     })

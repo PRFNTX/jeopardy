@@ -43,6 +43,9 @@ table, th, td {
   text-align:center;
   border-radius:10px;
 }
+th{
+  border-bottom:1.5vw solid black;
+}
 table .item{
   cursor:pointer;
 }
@@ -84,6 +87,5 @@ h4{
 .answer h1{
   text-align:center;
   position:relative;
-  top:50%;
-  transform:translateY(-150%);
+  top:30%;
 }
