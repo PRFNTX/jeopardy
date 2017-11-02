@@ -1,0 +1,89 @@
+body{
+  background-color:grey;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.main{
+  margin:auto;
+  position:relative;
+}
+table{
+  border-collapse:collapse;
+  margin:auto;
+}
+table, th, td {
+  border: 1vw solid black;
+  text-align:center;
+  border-radius:10px;
+}
+table .item{
+  cursor:pointer;
+}
+th{
+  text-align:center;
+}
+.item{
+  width:12vw;
+  height:7vw;
+    background-color:#3535EC;
+    color:#C5A410;
+    text-shadow:0.25vw 0.25vw black;
+}
+
+h1{
+  font-size:3vw;
+}
+h2{
+  font-size:2vw;
+}
+h3{
+  font-size:1.5vw;
+}
+h4{
+  font-size:1.5vw;
+}
+
+
+.answer{
+  position:absolute;
+  width:12vw;
+  height:7vw;
+  text-shadow:0.25vw 0.25vw black;
+  color:white;
+  background-color:#3535EC;
+  transition: left 0.5s, top 0.5s, width 0.5s, height 0.5s;
+}
+
+.answer h1{
+  text-align:center;
+  position:relative;
+  top:50%;
+  transform:translateY(-150%);
+}
