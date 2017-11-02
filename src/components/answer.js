@@ -1,19 +1,27 @@
 import React, {Component} from "react"
 
 class Answer extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             style:{},
             dd:false,
+        }
+        this.ddStyle={
+            "color":"orange",
         }
     }
     keydown=(e)=>{
         if (e.key===" "){
             this.props.destroy()
         }
-
+        else if ((e.key==="Enter")&&(this.state.dd)){
+            this.setState({
+                dd:false,
+            })
+        }
     }
+
     componentDidMount(){
         this.setState({
             style:{
@@ -33,8 +41,10 @@ class Answer extends Component{
 
     }
 
-    componentWillReceiveProps=()=>{
-        let newOb=Object.create(this.props.style)
+    componentWillMount(){
+        // let newOb=Object.create(this.props.style)
+        let newOb=this.props.style
+        console.log("here",newOb)
 
         this.setState({
             style:newOb
@@ -42,14 +52,16 @@ class Answer extends Component{
 
     }
     render(){
-        let dd=[];
-        if (this.props.dd){
-            dd=<h1 style={{"color":"orange"}}>DAILY DOUBLE!!</h1>
+        let content=this.props.content;
+        let style={}
+        if (this.state.dd){
+            content="DAILY DOUBLE!!"
+            style=this.ddStyle
+
         }
         return(
             <div className="answer" style={this.state.style} ref={(ref)=>this.content=ref}>
-                {dd}
-                <h1>{this.props.content}</h1>
+                <h1 style={style}>{content}</h1>
             </div>
         )
     }

@@ -32,13 +32,16 @@ class App extends Component {
   showAnswer=(at,pos)=>{
     // let rect=at.getClientBoundingRect()
     let stpos={
-      "top":at.top,
-      "left":at.left
+      "top":at.top+"px",
+      "left":at.left+"px",
     }
+    console.log(stpos.top)
+    console.log(at.left)
     let dd=false
     if ((pos.x===this.double.x)&&(pos.y===this.double.y)){
       dd=true
     }
+    console.log("st",stpos)
     let answer=<Answer style={stpos} content={this.content.answers[pos.x-1][pos.y-1]} destroy={this.destroy} dd={dd}/>
     this.setState({
       answer:answer
