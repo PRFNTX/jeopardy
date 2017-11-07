@@ -5,79 +5,79 @@ import HeaderRow from "./components/headerRow"
 import DataRow from "./components/dataRow"
 import Answer from "./components/answer"
 
-class App extends Component {
-  constructor(){
-    super()
-    this.state={
-      answer:[],
-    }
-    this.content={
-      categories:["Watch Your Language","Render Me Speechless","Fine Imports","I Object","Tag, You're It","This Category"],
-      //"element of surprise", "Git Gud",  
-      answers:[
-        ["lang 1","lang 2","lang3","lang4","lang5","lang6"],
-        ["rend 1","rend 2","rend 3","rend 4","rend 5","rend 6"],
-        ["import 1","import 2","import 3","import 4","import 5","import 6"],
-        ["Object 1","Object 2","Object 3","Object 4","Object 5","Object 6"],
-        ["tag 1","tag 2","tag 3","tag 4","tag 5","tag 6"],
-        ["this 1","this 2","this 3","this 4","this 5","this 6"]
-      ]
-    }
-    this.double={
-      x:3,
-      y:4
-    }
-  }
+import {BrowserRouter as Router, Switch, Link, Route} from "react-router-dom"
+import Game from "./Game"
+import New from "./New"
+import Home from "./Home"
 
-  showAnswer=(at,pos)=>{
-    // let rect=at.getClientBoundingRect()
-    let stpos={
-      "top":at.top+"px",
-      "left":at.left+"px",
-    }
-    console.log(stpos.top)
-    console.log(at.left)
-    let dd=false
-    if ((pos.x===this.double.x)&&(pos.y===this.double.y)){
-      dd=true
-    }
-    console.log("st",stpos)
-    let answer=<Answer style={stpos} content={this.content.answers[pos.x-1][pos.y-1]} destroy={this.destroy} dd={dd}/>
-    this.setState({
-      answer:answer
-    })
+import axios from "axios"
 
-  }
-
-  destroy=()=>{
-    this.setState({
-      answer:[],
-    })
-  }
-
-  render() {
-    let ansJSX={}
-    if(this.state.answer){
-      ansJSX=this.state.answer;
+class App extends Component{
+    constructor(){
+        super();
+        this.state={
+            categories:[],
+            //"element of surprise", "Git Gud",  
+            answers:[]
+        }
     }
-    return(
-      <div className="main">
-        {ansJSX}
-        <table className={tableStyle.borders}>
-          <thead>
-            <HeaderRow categories={this.content.categories}/>
-          </thead>
-          <tbody>
-            <DataRow show={this.showAnswer} rowVal={200} y={1}/>
-            <DataRow show={this.showAnswer} rowVal={400} y={2}/>
-            <DataRow show={this.showAnswer} rowVal={600} y={3}/>
-            <DataRow show={this.showAnswer} rowVal={800} y={4}/>
-            <DataRow show={this.showAnswer} rowVal={1000} y={5}/>
-          </tbody>
-        </table>
-      </div>
-    )
-  }
+
+    componentDidUpdate(){
+        console.log(this.state)
+    }
+
+    updateGame=(data)=>{
+        this.setState({
+            catagories:data.categories,
+            answers:data.answers
+        })
+
+    }
+
+    fillGame=(data,name)=>{
+        console.log(data)
+        let cats=Array.from(data.categories)
+        let ans=Array.from(data.answers)
+        console.log(ans)
+        console.log(cats)
+        this.setState({
+            categories:cats,
+            answers:ans,
+        })
+        console.log("did the thing")
+        let gameDB={
+            name:name,
+            categories:cats,
+            answers:ans
+        }
+        axios.post("/game",gameDB).then(
+            (result)=>{
+                console.log("saved"+ result.data.name)
+            },
+            (err)=>{
+                console.log(err.response.data.message)
+            }
+        )
+    }
+    
+    render(){
+        return(
+            <Router>
+                <Switch>
+                    <Route path="/" exact render={()=>{
+                                return <Home setGame={this.updateGame} />
+                            }
+                        } />
+                    <Route path="/game" exact render={()=>{
+                        return <Game categories={this.state.categories} answers={this.state.answers} />
+                        }} />
+                    <Route path="/new" render={()=>{
+                        return <New edit={false} submit={this.fillGame}/>
+                    }} />
+                </Switch>
+            </Router>
+        )
+    }
 }
 
-export default App;
+export default App

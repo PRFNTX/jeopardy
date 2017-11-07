@@ -59,6 +59,10 @@ th{
     color:#C5A410;
     text-shadow:0.25vw 0.25vw black;
 }
+.input {
+  width:100%;
+  resize:none;
+}
 
 h1{
   font-size:3vw;
@@ -84,8 +88,31 @@ h4{
   transition: left 0.5s, top 0.5s, width 0.5s, height 0.5s;
 }
 
+.answer-font{
+  color:white;
+  text-shadow:0.25vw 0.25vw black;
+
+}
+
 .answer h1{
   text-align:center;
   position:relative;
   top:30%;
+}
+
+.games {
+  background-color:#3535EC;
+  text-align:center;
+}
+.games h3 {
+  font-size:3vw;
+  cursor:pointer;
+}
+
+.games h3:hover{
+  background-color:yellow;
+}
+
+.games .selected {
+  background-color:#06DD06;
 }
