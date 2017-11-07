@@ -146,7 +146,7 @@ class New extends Component{
                 <label>Game Name:</label><input name="name" type="text" placeholder="board name here (unique)" required/>
                 <input type="submit"/>
             </form>
-            <Link to="/">TEXT </Link>
+            <Link to="/"> Home </Link>
             </div>
         )
     }

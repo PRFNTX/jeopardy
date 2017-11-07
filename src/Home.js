@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import axios from "axios"
 
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 
 class GameItem extends Component{
     render(){
@@ -27,8 +27,10 @@ class Home extends Component{
                 categories:[],
                 answers:[]
             }],
-            selected:0
+            selected:0,
+            red:[],
         }
+        
     }
     componentDidMount(){
         axios.get("/game").then(
@@ -49,11 +51,13 @@ class Home extends Component{
         this.setState({
             selected:id
         })
-        this.props.setGame(this.state.games[this.state.selected])
+        this.props.setGame(this.state.games[id])
     }
 
     openGame=()=>{
-        window.location.pathname="/game"
+        this.setState({
+            red:<Redirect to="/game"/>
+        })
     }
 
     render(){
@@ -62,6 +66,7 @@ class Home extends Component{
         let shownCategories=this.state.games[this.state.selected].categories.map(val=><li>{val}</li>)
         return(
             <div>
+                {this.state.red}
                 <h1> Games: </h1>
                 <div className="games" >
                     {games}

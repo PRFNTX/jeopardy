@@ -27,9 +27,11 @@ class App extends Component{
     }
 
     updateGame=(data)=>{
+        let cats=Array.from(data.categories)
+        let ans=Array.from(data.answers)
         this.setState({
-            catagories:data.categories,
-            answers:data.answers
+            categories:cats,
+            answers:ans
         })
 
     }
@@ -61,6 +63,7 @@ class App extends Component{
     }
     
     render(){
+        console.log(this.state)
         return(
             <Router>
                 <Switch>
@@ -69,7 +72,7 @@ class App extends Component{
                             }
                         } />
                     <Route path="/game" exact render={()=>{
-                        return <Game categories={this.state.categories} answers={this.state.answers} />
+                        return <Game stateObject={this} categories={this.state.categories} answers={this.state.answers} />
                         }} />
                     <Route path="/new" render={()=>{
                         return <New edit={false} submit={this.fillGame}/>
