@@ -60,6 +60,22 @@ class Home extends Component{
         })
     }
 
+    handleNew(){
+
+       this.setState({
+           red:<Redirect to="/new" />
+       }) 
+    }
+
+    handleEdit(){
+        this.props.edit()
+        this.setState({
+            red:<Redirect to="/new" />
+        }) 
+
+
+    }
+
     render(){
         let games=this.state.games.map((val,i)=><GameItem id={i} key={i} click={this.handleClick} sel={i===this.state.selected} name={val.name} />)
         let shownName = this.state.games[this.state.selected].name
@@ -78,6 +94,8 @@ class Home extends Component{
                 </ul>
                 </div>
                 <button onClick={this.openGame}> Start </button>
+                <button onClick={()=>{this.handleEdit()}}> Edit </button>
+                <button onClick={()=>{this.handleNew()}}> New </button>
             </div>
         )
     }

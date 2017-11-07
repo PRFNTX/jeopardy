@@ -20,6 +20,7 @@ class App extends Component{
             //"element of surprise", "Git Gud",  
             answers:[]
         }
+        this.edit=false;
     }
 
     componentDidUpdate(){
@@ -61,6 +62,20 @@ class App extends Component{
             }
         )
     }
+
+    toEdit=()=>{
+        this.edit=true;
+    }
+
+    noNew=()=>{
+        this.edit=false
+    }
+
+    getEdit(){
+        let ret=this.edit
+        this.edit=false
+        return ret
+    }
     
     render(){
         console.log(this.state)
@@ -68,14 +83,14 @@ class App extends Component{
             <Router>
                 <Switch>
                     <Route path="/" exact render={()=>{
-                                return <Home setGame={this.updateGame} />
+                                return <Home setGame={this.updateGame} edit={this.toEdit} new={this.toNew} />
                             }
                         } />
                     <Route path="/game" exact render={()=>{
                         return <Game stateObject={this} categories={this.state.categories} answers={this.state.answers} />
                         }} />
                     <Route path="/new" render={()=>{
-                        return <New edit={false} submit={this.fillGame}/>
+                        return <New edit={this.getEdit()} submit={this.fillGame} />
                     }} />
                 </Switch>
             </Router>

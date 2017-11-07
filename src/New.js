@@ -10,6 +10,7 @@ class New extends Component{
     constructor(){
         super()
         this.state={
+            dataIn:[],
             edit:false,
             header:[],
             body:[]
