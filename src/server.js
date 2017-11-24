@@ -1,6 +1,7 @@
 const express=require("express");
 const mongoose=require("mongoose");
-const Game=require("./models/game")
+const Game=require("./models/game"),
+path = require('path');
 mongoose.connect(process.env.MONGO_URI)
 const app=express()
 
@@ -64,6 +65,10 @@ app.post('/game',(req,res)=>{
         res.status(200).json(game)
         
     })
+})
+
+app.get('*', (req,res)=>{
+    res.sendFile(path.resolve(__dirname+'/build/index.html'))
 })
 
 const PORT = process.env.PORT||8080
