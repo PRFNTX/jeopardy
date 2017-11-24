@@ -65,6 +65,6 @@ app.post('/game',(req,res)=>{
     })
 })
 
-app.listen(process.env.PORT,()=>{
+app.listen(process.env.PORT||8080,()=>{
 	console.log("started")
 })

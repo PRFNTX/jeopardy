@@ -32,7 +32,7 @@ class Home extends Component{
         }
         
     }
-    componentDidMount(){
+    componentWillMount(){
         axios.get("/game").then(
             (result)=>{
                 console.log(result.data)
@@ -41,8 +41,13 @@ class Home extends Component{
                 })
             },
             (err)=>{
+				console.log(err)
                 this.setState({
-                    games:[{name:"failed to load"}]
+                    games:[{
+						name:"failed to load",
+						categories:[],
+						answers:[]
+					}]
                 })
             }
         )
