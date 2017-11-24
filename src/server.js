@@ -65,6 +65,6 @@ app.post('/game',(req,res)=>{
     })
 })
 
-app.listen(3005,()=>{
-    console.log("jeopardy started on 3005")
+app.listen(process.env.PORT,()=>{
+	console.log("started")
 })
