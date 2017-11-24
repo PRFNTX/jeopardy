@@ -1,9 +1,10 @@
 const express=require("express");
 const mongoose=require("mongoose");
 const Game=require("./models/game")
-mongoose.connect("mongodb://localhost/jeopardy")
+mongoose.connect(process.env.MONGO_URI)
 const app=express()
 
+app.use(express.static(__dirname+"../build"))
 app.use(express.json())
 
 app.get("/game/:name",(req,res)=>{
@@ -65,6 +66,8 @@ app.post('/game',(req,res)=>{
     })
 })
 
-app.listen(process.env.PORT||8080,()=>{
+const PORT = process.env.PORT||8080
+
+app.listen(PORT,()=>{
 	console.log("started")
 })
